@@ -2,23 +2,36 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { View, FlatList } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 import { db } from "../config/firebase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Homescreen() {
-    const[produtos, setProdutos] = useState([]);
-    const [nomeDoProduto, setNomeDoProduto] = useState("");
+    const[produto, setProduto] = useState([]);
+    const [NomeDoProduto, setNomeDoProduto] = useState("");
 
-    async function queryProdutos(nomeDoProduto = null ){
+
+    async function queryProduto(NomeDoProduto = null ){
         try{
-            const produtosRef = collection(db, "produto");
-            const queryProdutos = query(produtosRef, where("NomeDoProduto"  , "==", "abacaxi"));
+            if (!NomeDoProduto) return
+            const produtoRef = collection(db, "produto");
+            const queryProduto = query(produtoRef, where("NomeDoProduto"  , ">=", NomeDoProduto));
 
 
-            const querySnapshot = await getDocs(query);
+            const querySnapshot = await getDocs(queryProduto);
+            const produtoTemp = [];
+            querySnapshot.forEach((doc) => {
+                produtoTemp.push(doc.data());
+            }
+            );
+            setProduto(produtoTemp);
+
         } catch(error) {
             console.log(error);
         }     
     }
+
+    useEffect(() => {
+        queryProduto(NomeDoProduto);
+    }, [NomeDoProduto])
     
 
 
@@ -29,11 +42,11 @@ export default function Homescreen() {
             <Text>Home</Text>
             <TextInput
                 label="Nome do Produto"
-                value={nomeDoProduto}
+                value={NomeDoProduto}
                 onChangeText={setNomeDoProduto} />
 
             <FlatList
-                data={produtos}
+                data={produto}
                 renderItem={({ item }) => <Text>{item.NomeDoProduto}</Text>}
                 keyExtractor={(item) => item.id}
             />
