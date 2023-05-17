@@ -1,6 +1,6 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { View } from "react-native";
-import { Text } from "react-native-paper";
+import { View, FlatList } from "react-native";
+import { Text, TextInput } from "react-native-paper";
 import { db } from "../config/firebase";
 import { useState } from "react";
 
@@ -23,6 +23,16 @@ export default function Homescreen() {
     return(
         <View>
             <Text>Home</Text>
+            <TextInput
+                label="Nome do Produto"
+                value={nomeDoProduto}
+                onChangeText={setNomeDoProduto}
+            />
+            <FlatList
+                data={produtos}
+                renderItem={({ item }) => <Text>{item.NomeDoProduto}</Text>}
+                keyExtractor={(item) => item.id}
+            />
         </View>
     )
 }
