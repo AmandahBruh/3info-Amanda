@@ -22,33 +22,7 @@ export default function Homescreen() {
         }     
     }
     
-    async function queryProdutos(precoDoProduto = null ){
-        try{
-            const produtosRef = collection(db, "produto");
-            const queryProdutos = query(produtosRef, where("PrecoDoProduto"  , "==", "2,00"));
 
-
-            const querySnapshot = await getDocs(query);
-        } catch(error) {
-            console.log(error);
-        }     
-    }
-
-    async function queryProdutos(quantidadeDoProduto = null ){
-        try{
-            const produtosRef = collection(db, "produto");
-            const queryProdutos = query(produtosRef, where("QuantidadeDoProduto"  , "==", "3"));
-
-
-            const querySnapshot = await getDocs(query);
-        } catch(error) {
-            console.log(error);
-        }     
-    }
-    
-    function CadastrarProduto(){
-
-    };
 
 
 
@@ -58,20 +32,7 @@ export default function Homescreen() {
             <TextInput
                 label="Nome do Produto"
                 value={nomeDoProduto}
-                onChangeText={setNomeDoProduto}
-            />
-            <TextInput
-                label="Preço do Produto"
-                value={precoDoProduto}
-                onChangeText={setPrecoDoProduto}
-            />
-            <TextInput
-                label="Quantidade do Produto"
-                value={quantidadeDoProduto}
-                onChangeText={setQuantidadeDoProduto}
-            />
-
-            <Button onPress={CadastrarProduto}>aaaaaaaaaaaaaa</Button>
+                onChangeText={setNomeDoProduto} />
 
             <FlatList
                 data={produtos}
