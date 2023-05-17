@@ -1,6 +1,6 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { View, FlatList } from "react-native";
-import { Text, TextInput } from "react-native-paper";
+import { Button, Text, TextInput } from "react-native-paper";
 import { db } from "../config/firebase";
 import { useState } from "react";
 
@@ -33,7 +33,7 @@ export default function Homescreen() {
             console.log(error);
         }     
     }
-    
+
     async function queryProdutos(quantidadeDoProduto = null ){
         try{
             const produtosRef = collection(db, "produto");
@@ -46,7 +46,9 @@ export default function Homescreen() {
         }     
     }
     
+    function CadastrarProduto(){
 
+    };
 
 
 
@@ -68,6 +70,9 @@ export default function Homescreen() {
                 value={quantidadeDoProduto}
                 onChangeText={setQuantidadeDoProduto}
             />
+
+            <Button onPress={CadastrarProduto}>aaaaaaaaaaaaaa</Button>
+
             <FlatList
                 data={produtos}
                 renderItem={({ item }) => <Text>{item.NomeDoProduto}</Text>}
