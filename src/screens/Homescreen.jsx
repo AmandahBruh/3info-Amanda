@@ -7,8 +7,6 @@ import { useState } from "react";
 export default function Homescreen() {
     const[produtos, setProdutos] = useState([]);
     const [nomeDoProduto, setNomeDoProduto] = useState("");
-    const [precoDoProduto, setPrecoDoProduto] = useState("");
-    const [quantidadeDoProduto, setQuantidadeDoProduto] = useState("");
 
     async function queryProdutos(nomeDoProduto = null ){
         try{
