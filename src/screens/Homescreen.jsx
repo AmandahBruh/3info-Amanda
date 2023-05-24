@@ -54,6 +54,14 @@ export default function HomeScreen({ navigation }) {
       >
         Produto
       </Button>
+      <Button
+        mode="contained"
+        onPress={() => {
+          navigation.navigate("IncluirPessoa");
+        }}
+      >
+        Incluir Pessoa
+      </Button>
     </View>
   );
 }

@@ -6,15 +6,15 @@ import { useEffect, useState } from "react";
 import { styles } from "../utils/styles";
 
 export default function BuscarFruta({ navigation }) {
-  const [fruta, setfruta] = useState([]);
+  const [fruta, setFruta] = useState([]);
   const [NomeDaFruta, setNomeDaFruta] = useState("");
 
-  async function queryCor(NomeDaFruta = null) {
+  async function queryFruta(NomeDaFruta = null) {
     try {
       if (!NomeDaFruta) return;
-      const corRef = collection(db, "cor");
-      const queryCor = query(
-        corRef,
+      const frutaRef = collection(db, "fruta");
+      const queryFruta = query(
+        frutaRef,
         where("NomeDaFruta", ">=", NomeDaFruta),
         where("NomeDaFruta", "<=", NomeDaFruta + "\uf8ff")
       );
@@ -22,16 +22,16 @@ export default function BuscarFruta({ navigation }) {
       const querySnapshot = await getDocs(queryFruta);
       const frutaTemp = [];
       querySnapshot.forEach((doc) => {
-        corTemp.push(doc.data());
+        frutaTemp.push(doc.data());
       });
-      setCor(frutaTemp);
+      setFruta(frutaTemp);
     } catch (error) {
       console.log(error);
     }
   }
 
   useEffect(() => {
-    queryCor(NomeDaFruta);
+    queryFruta(NomeDaFruta);
   }, [NomeDaFruta]);
 
   return (
@@ -44,7 +44,7 @@ export default function BuscarFruta({ navigation }) {
       />
 
       <FlatList
-        data={cor}
+        data={fruta}
         renderItem={({ item }) => (
           <Text key={item.id}>{item.NomeDaFruta}</Text>
         )}

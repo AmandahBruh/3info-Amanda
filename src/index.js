@@ -22,7 +22,7 @@ export default function RootNavigation() {
         <Stack.Screen name="BuscarCor" component={BuscarCor} />
         <Stack.Screen name="BuscarFruta" component={BuscarFruta} />
         <Stack.Screen name="BuscarAnimal" component={BuscarAnimal} />
-        <Stack.Screen name="InserirPessoa" component={IncluirPessoa} />
+        <Stack.Screen name="IncluirPessoa" component={IncluirPessoa} />
       </Stack.Navigator>
     </NavigationContainer>
   );
